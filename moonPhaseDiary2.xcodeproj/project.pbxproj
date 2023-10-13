@@ -17,6 +17,7 @@
 		8DCE89B12AD77D1F003B1F05 /* moonPhaseDiary2UITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8DCE89B02AD77D1F003B1F05 /* moonPhaseDiary2UITestsLaunchTests.swift */; };
 		8DCE89C82AD8D3A0003B1F05 /* SunMoon.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8DCE89C72AD8D3A0003B1F05 /* SunMoon.swift */; };
 		8DCE89CB2AD8D404003B1F05 /* String+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8DCE89CA2AD8D404003B1F05 /* String+.swift */; };
+		8DCE89CD2AD8E46D003B1F05 /* MoonPhase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8DCE89CC2AD8E46D003B1F05 /* MoonPhase.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -52,6 +53,7 @@
 		8DCE89B02AD77D1F003B1F05 /* moonPhaseDiary2UITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = moonPhaseDiary2UITestsLaunchTests.swift; sourceTree = "<group>"; };
 		8DCE89C72AD8D3A0003B1F05 /* SunMoon.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SunMoon.swift; sourceTree = "<group>"; };
 		8DCE89CA2AD8D404003B1F05 /* String+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+.swift"; sourceTree = "<group>"; };
+		8DCE89CC2AD8E46D003B1F05 /* MoonPhase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MoonPhase.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -168,6 +170,7 @@
 			isa = PBXGroup;
 			children = (
 				8DCE89C72AD8D3A0003B1F05 /* SunMoon.swift */,
+				8DCE89CC2AD8E46D003B1F05 /* MoonPhase.swift */,
 			);
 			path = Lib;
 			sourceTree = "<group>";
@@ -314,6 +317,7 @@
 				8DCE89942AD77D1E003B1F05 /* Item.swift in Sources */,
 				8DCE89CB2AD8D404003B1F05 /* String+.swift in Sources */,
 				8DCE89902AD77D1E003B1F05 /* moonPhaseDiary2App.swift in Sources */,
+				8DCE89CD2AD8E46D003B1F05 /* MoonPhase.swift in Sources */,
 				8DCE89C82AD8D3A0003B1F05 /* SunMoon.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
