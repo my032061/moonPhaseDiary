@@ -24,22 +24,19 @@ class SunMoon {
     
     
     //地平線伏角
-    private func dip(height: Double) -> Double
-    {
+    private func dip(height: Double) -> Double {
         return 0.0353333 * sqrt(height)
     }
     
     //自転遅れ補正値(日)
-    private func rotateRev ( year: Double) -> Double
-    {
+    private func rotateRev ( year: Double) -> Double {
         return ((57 + 0.8 * (year - 1990)) / ADAY);
     }
 
     // 角度の正規化を行う。すなわち引数の範囲を 0≦θ＜360 にする。
     // 引数   .... ang : 角度
     // 戻り値 .... 角度 ( 度 )
-    private func normalizeAngle(ang: Double) -> Double
-    {
+    private func normalizeAngle(ang: Double) -> Double {
         return ang - 360.0 * trunc(ang / 360.0)
     }
     
@@ -48,8 +45,7 @@ class SunMoon {
     //             .. jy : 経過ユリウス年
     //             .. t  : 時刻 ( 0.xxxx日 )
     // 戻り値 .... 観測地点の恒星時Θ(度)
-    private func calcTimeSidereal( jy:Double, t: Double, longitude: Double) -> Double
-    {
+    private func calcTimeSidereal( jy:Double, t: Double, longitude: Double) -> Double {
         
         var val: Double  = 325.4606
         val += 360.007700536 * jy
@@ -61,8 +57,7 @@ class SunMoon {
     }
     
     
-    private func adjustmentCalc(ary: [[Double]], jy: Double) -> Double
-    {
+    private func adjustmentCalc(ary: [[Double]], jy: Double) -> Double {
         var reslt:Double = 0.0
         for item in 0..<ary.count {
             if item == 0 {
@@ -79,8 +74,7 @@ class SunMoon {
     // 月の視差計算
     // 引数   .... jy : 経過ユリウス年
     // 戻り値 .... 出入時刻 ( 0.xxxx日 )
-    func calcDifMoon(jy:Double)-> Double
-    {
+    func calcDifMoon(jy:Double)-> Double {
         let ary:[[Double]] = [
             [0.0003, 227.0, 4412],
             [0.0004, 194.0, 3773.4],
@@ -99,16 +93,14 @@ class SunMoon {
     // 経過ユリウス年(日)計算
     // 引数   .... t : 時刻 ( 0.xxxx日 )
     // 戻り値 .... 2000.0(2000年1月1日力学時正午)からの経過年数 (年)
-    func calcJy(t: Double, dayProgress: Double, yr: Double) -> Double
-    {
+    func calcJy(t: Double, dayProgress: Double, yr: Double) -> Double {
         return (dayProgress + t + rotateRev(year: yr)) / 365.25
     }
     
     //太陽の黄経 λsun(jy) を計算する
     // 引数   .... jy : 経過ユリウス年
     // 戻り値 .... 黄経
-    func calcLngSun(jy: Double) -> Double
-    {
+    func calcLngSun(jy: Double) -> Double {
         let ary:[[Double]] = [
             [0.0003, 329.7, 44.43],
             [0.0003, 352.5, 1079.97],
@@ -139,8 +131,7 @@ class SunMoon {
     // 太陽の距離 r(jy) を計算する
     // 引数   .... jy : 経過ユリウス年
     // 戻り値 .... 距離
-    func calcDistSun(jy: Double) -> Double
-    {
+    func calcDistSun(jy: Double) -> Double {
         var r_sun = 0.0
         r_sun  = 0.000007 * sin(PI_180 * normalizeAngle(ang: 156.0 +  329.6  * jy))
         r_sun += 0.000007 * sin(PI_180 * normalizeAngle(ang: 254.0 +  450.4  * jy))
@@ -154,8 +145,7 @@ class SunMoon {
     //月の黄経 λmoon(jy) を計算する
     //引数   .... jy : 経過ユリウス年
     //戻り値 .... 黄経
-    func calcLngMoon(jy: Double) -> Double
-    {
+    func calcLngMoon(jy: Double) -> Double {
         let am_array:[[Double]] = [
             [0.0006, 54.0, 19.3],
             [0.0006, 71.0, 0.2],
@@ -236,8 +226,7 @@ class SunMoon {
     // 月の黄緯 βmoon(jy) を計算する
     // 引数　 .... jy : 経過ユリウス年
     // 戻り値 .... 黄緯
-    func calcLatMoon(jy: Double) -> Double
-    {
+    func calcLatMoon(jy: Double) -> Double {
         let bm_array:[[Double]] = [
             [0.0005, 307.0,   19.4],
             [0.0026,  55.0,  19.34],
@@ -299,16 +288,9 @@ class SunMoon {
         return bt_moon
     }
 
-    //タイムゾーンとグリニッジ標準時との間隔
-    func hourFromGMT() -> Int
-    {
-        return TimeZone.current.secondsFromGMT() / 3600
-    }
-    
     //2000年1月1日力学時正午からの経過日数計算
     // 戻り値 .... 2000.0(2000年1月1日力学時正午)からの経過日数 (日)
-    func calcTimeProgress(date: Date) -> Double
-    {
+    func calcTimeProgress(date: Date) -> Double {
         // 年月日取得
         var time_progress: Double = 0
         let df = DateFormatter()
@@ -338,8 +320,7 @@ class SunMoon {
     //             .. height        : 観測地点の出没高度(度)
     //             .. flag          : 出入フラグ ( 0 : 出, 1 : 入, 2 : 南中 )
     // 戻り値 .... 時角の差　dt
-    func calcHourAngDif(sekkei: Double, sekii: Double, time_sidereal: Double, height: Double, latitude: Double, flag: Int) -> Double
-    {
+    func calcHourAngDif(sekkei: Double, sekii: Double, time_sidereal: Double, height: Double, latitude: Double, flag: Int) -> Double {
         var dt: Double = 0, tk: Double = 0
         if (flag == 2) {
             tk = 0;
@@ -379,8 +360,7 @@ class SunMoon {
     //             .. jy     : 経過ユリウス年
     //             .. t      : 時刻 ( 0.xxxx日 )
     // 戻り値 .... 角度(xx.x度)
-    func calcAngE(sekkei: Double, sekii: Double, jy: Double, t: Double, latitude: Double, longitude: Double) -> Double
-    {
+    func calcAngE(sekkei: Double, sekii: Double, jy: Double, t: Double, latitude: Double, longitude: Double) -> Double {
         let time_sidereal: Double = calcTimeSidereal(jy: jy, t: t, longitude: longitude)
         // 天体の時角
         let hour_ang = time_sidereal - sekkei
@@ -403,8 +383,7 @@ class SunMoon {
         return ang
     }
     
-    func calcAngleKodo(jy: Double) -> Double
-    {
+    func calcAngleKodo(jy: Double) -> Double {
         return (23.439291 - 0.000130042 * jy) * PI_180
     }
     
@@ -416,8 +395,7 @@ class SunMoon {
     // 戻り値 .... hash
     //             .. sekkei : 赤経( α(jy)(度) )
     //             .. sekii  : 赤緯( δ(jy)(度) )
-    func calcKou2sekiSekkei(kokei: Double, koi: Double, jy: Double) -> Double
-    {
+    func calcKou2sekiSekkei(kokei: Double, koi: Double, jy: Double) -> Double {
         // 黄道傾角
         let angle_kodo = calcAngleKodo(jy: jy);
         
@@ -436,8 +414,7 @@ class SunMoon {
         return sekkei
     }
     
-    func calcKou2sekiSekii(kokei: Double, koi: Double, jy: Double) -> Double
-    {
+    func calcKou2sekiSekii(kokei: Double, koi: Double, jy: Double) -> Double {
         
         // 黄道傾角
         let angle_kodo = calcAngleKodo(jy: jy)
@@ -456,8 +433,7 @@ class SunMoon {
     //             .. jy    : 経過ユリウス年
     //             .. t     : 時刻 ( 0.xxxx日 )
     // 戻り値 ....  角度(xx.x度)
-    func calcAng( kokei: Double, koi: Double, jy: Double, t: Double, latitude: Double, longitude: Double) -> Double
-    {
+    func calcAng( kokei: Double, koi: Double, jy: Double, t: Double, latitude: Double, longitude: Double) -> Double {
         // 黄道 -> 赤道変換
         let sekkei = calcKou2sekiSekkei(kokei: kokei, koi: koi, jy: jy)
         let sekii  = calcKou2sekiSekii(kokei: kokei, koi: koi, jy: jy)
@@ -471,8 +447,7 @@ class SunMoon {
     //             .. jy     : 経過ユリウス年
     //             .. t      : 時刻 ( 0.xxxx日 )
     // 戻り値 .... 高度(xx.x度)
-    func calcHeightE( sekkei: Double, sekii: Double, jy: Double, t: Double, latitude: Double, longitude: Double) -> Double
-    {
+    func calcHeightE( sekkei: Double, sekii: Double, jy: Double, t: Double, latitude: Double, longitude: Double) -> Double {
         // 恒星時
         let time_sidereal = calcTimeSidereal(jy: jy, t: t, longitude: longitude)
         
@@ -530,8 +505,7 @@ class SunMoon {
     //             .. jy    : 経過ユリウス年
     //             .. t     : 時刻 ( 0.xxxx日 )
     // 戻り値 .... 高度(xx.x度)
-    func calcHeight( kokei: Double, koi: Double, jy: Double, t: Double, latitude: Double, longitude: Double) -> Double
-    {
+    func calcHeight( kokei: Double, koi: Double, jy: Double, t: Double, latitude: Double, longitude: Double) -> Double {
         // 黄道 -> 赤道変換
         let sekkei = calcKou2sekiSekkei(kokei: kokei, koi: koi, jy: jy)
         let sekii  = calcKou2sekiSekii(kokei: kokei, koi: koi, jy: jy)
@@ -548,8 +522,7 @@ class SunMoon {
     //          + ( 30.59 ( month - 2 ) )
     //          + day
     //          + 1721088
-    func gcToJd(year: Double, month: Double, day: Double) -> Double
-    {
+    func gcToJd(year: Double, month: Double, day: Double) -> Double {
         var y = year, m = month
         // 1月,2月は前年の13月,14月とする
         if (month < 3) {
@@ -606,8 +579,7 @@ class SunMoon {
     }
     
     //NSDate -> year
-    func date2year(date: Date) -> Double
-    {
+    func date2year(date: Date) -> Double {
         let df = DateFormatter()
         df.dateFormat  = "yyyy/MM/dd";
         let strDate = df.string(from: date)
@@ -673,8 +645,7 @@ class SunMoon {
     // 月の出/月の入/月の南中計算
     // 引数   .... flag : 出入フラグ ( 0 : 月の出, 1 : 月の入, 2 : 月の南中 )
     // 戻り値 .... 出入時刻 ( 0.xxxx日 )
-    func calcTimeMoon(day_progress: Double, rotate_rev: Double, height: Double,  longitude: Double, latitude: Double, flag :Int) -> Double
-    {
+    func calcTimeMoon(day_progress: Double, rotate_rev: Double, height: Double,  longitude: Double, latitude: Double, flag :Int) -> Double {
         // 補正値初期値
         var rev: Double = 1.0;
         // 逐次計算時刻(日)初期設定
@@ -736,7 +707,25 @@ class SunMoon {
         return convertTime(num: dTime * 24)
     }
     
+    func getMoonPhase(date: Date) -> Int {
+        var moonPhase = 0
+        let jy = nsdate2jy(date: date)
+        let ls = calcLngSun(jy: jy)
+        let lm = calcLngMoon(jy: jy)
+        moonPhase = Int(round((normalizeAngle(ang: lm - ls) / 360) * 28))
+        if (moonPhase == 28) {
+            moonPhase = 0
+        }
 
+        return moonPhase
+    }
+    
+
+}
+
+//タイムゾーンとグリニッジ標準時との間隔
+func hourFromGMT() -> Int {
+    return TimeZone.current.secondsFromGMT() / 3600
 }
 
 
