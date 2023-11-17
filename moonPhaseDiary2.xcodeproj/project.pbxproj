@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		8D983D022AF6875700191067 /* PhaseData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D983D012AF6875700191067 /* PhaseData.swift */; };
 		8DCE89902AD77D1E003B1F05 /* moonPhaseDiary2App.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8DCE898F2AD77D1E003B1F05 /* moonPhaseDiary2App.swift */; };
 		8DCE89922AD77D1E003B1F05 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8DCE89912AD77D1E003B1F05 /* ContentView.swift */; };
 		8DCE89942AD77D1E003B1F05 /* Item.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8DCE89932AD77D1E003B1F05 /* Item.swift */; };
@@ -39,6 +40,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		8D983D012AF6875700191067 /* PhaseData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhaseData.swift; sourceTree = "<group>"; };
 		8DCE898C2AD77D1E003B1F05 /* moonPhaseDiary2.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = moonPhaseDiary2.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		8DCE898F2AD77D1E003B1F05 /* moonPhaseDiary2App.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = moonPhaseDiary2App.swift; sourceTree = "<group>"; };
 		8DCE89912AD77D1E003B1F05 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -164,6 +166,7 @@
 			isa = PBXGroup;
 			children = (
 				8DCE89932AD77D1E003B1F05 /* Item.swift */,
+				8D983D012AF6875700191067 /* PhaseData.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -321,6 +324,7 @@
 				8DCE89942AD77D1E003B1F05 /* Item.swift in Sources */,
 				8DCE89CB2AD8D404003B1F05 /* String+.swift in Sources */,
 				8DCE89902AD77D1E003B1F05 /* moonPhaseDiary2App.swift in Sources */,
+				8D983D022AF6875700191067 /* PhaseData.swift in Sources */,
 				8DCE89CD2AD8E46D003B1F05 /* MoonPhase.swift in Sources */,
 				8DCE89C82AD8D3A0003B1F05 /* SunMoon.swift in Sources */,
 			);

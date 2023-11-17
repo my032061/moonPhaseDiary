@@ -14,7 +14,7 @@ class LocationBrain: NSObject, ObservableObject, CLLocationManagerDelegate {
     @Published var location: CLLocation?//CLLocationCoordinate2D?
     @Published var requesting: Bool = false
     @Published var place: CLPlacemark?
-    //@Published var :CLLocation
+    //@Published var city = ""
 
     
     override init() {
@@ -62,6 +62,15 @@ class LocationBrain: NSObject, ObservableObject, CLLocationManagerDelegate {
         } catch {
             print(error)
             return nil
+        }
+    }
+    
+    func getCityName(place: CLPlacemark?) -> String {
+        if let p = place {
+            return p.locality ?? ""
+        }
+        else {
+            return ""
         }
     }
 }

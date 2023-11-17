@@ -13,6 +13,8 @@ import CoreLocationUI
 struct ContentView: View {
     
     @StateObject var locationClient = LocationBrain()
+    @State var city: String = ""
+    let phase = Phase()
 //    @Environment(\.modelContext) private var modelContext
 //    @Query private var items: [Item]
 
@@ -21,11 +23,16 @@ struct ContentView: View {
             VStack {
                 Text("[位置情報]")
                 if let location = locationClient.location  {
+                    let phaseData = phase.getPhaseData(date: Date(), place: location)
                     let ps = locationClient.place
+                    let cityName = locationClient.getCityName(place: ps)
+                    Text("現在地:\(cityName)")
+                    Text("月齢: \(phaseData.moonPhase)")
                     Text("緯度：\(location.coordinate.latitude)")
                     Text("経度：\(location.coordinate.longitude)")
                     Text("高度：\(location.altitude)")
                 } else {
+                    Text("現在地:不明")
                     Text("緯度：----")
                     Text("経度：----")
                     Text("高度：----")
@@ -96,7 +103,7 @@ struct ContentView: View {
 //    }
 }
 
-#Preview {
-    ContentView()
-        .modelContainer(for: Item.self, inMemory: true)
-}
+//#Preview {
+//    ContentView( phaseData: <#Phase.PhaseData#>)
+//        .modelContainer(for: Item.self, inMemory: true)
+//}
